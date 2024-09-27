@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Colecciones</title>
+</head>
+<body>
+    <h1>Selecciona una Colección</h1>
+    <ul>
+        {% for coleccion in colecciones %}
+            <li><a href="/colecciones/{{ coleccion }}">{{ coleccion }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

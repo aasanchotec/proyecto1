@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Colección {{ nombre_coleccion }}</title>
+</head>
+<body>
+    <h1>Documentos en {{ nombre_coleccion }}</h1>
+    <ul>
+        {% for doc in documentos %}
+        <li>{{ doc }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/">Volver al Dashboard</a>
+</body>
+</html>
