@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestión de {{ nombre_coleccion }}</title>
+</head>
+<body>
+    <h1>Gestión de {{ nombre_coleccion }}</h1>
+    <form method="POST">
+        {% for key in fields %}
+        <label for="{{ key }}">{{ key }}</label>
+        <input type="text" id="{{ key }}" name="{{ key }}">
+        <input type="checkbox" name="check_{{ key }}"><br>
+        {% endfor %}
+        <button type="submit" name="action" value="Agregar">Agregar</button>
+        <button type="submit" name="action" value="Actualizar">Actualizar</button>
+        <button type="submit" name="action" value="Eliminar">Eliminar</button>
+        <button type="submit" name="action" value="Consultar">Consultar</button>
+        <button type="submit" name="action" value="Ver Todo">Ver Todo</button>
+        <button type="submit" name="action" value="Salir">Salir</button>
+    </form>
+</body>
+</html>
