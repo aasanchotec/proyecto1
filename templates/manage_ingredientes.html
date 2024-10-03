@@ -8,39 +8,81 @@
     <h1>Gestión de Ingredientes</h1>
     <form method="POST">
         <input type="hidden" name="action" value="none" id="action">
+        <label for="_id">ID:</label>
+        <input type="text" id="_id" name="_id" placeholder="ID del Ingrediente"><br>
+        
+        <label for="name_spanish">Nombre Español:</label>
+        <input type="text" id="name_spanish" name="name_spanish" placeholder="Nombre en Español">
+        <input type="checkbox" name="update_name_spanish"><br>
 
-        <label>Nombre Original:</label>
-        <input type="text" name="nombre_original" placeholder="Nombre Original">
-        <input type="checkbox" name="update_nombre_original"><br>
+        <label for="names_indigenous_languages">Nombres en Lenguas Indígenas:</label>
+        <input type="text" id="names_indigenous_languages" name="names_indigenous_languages" placeholder="Nombres en Lenguas Indígenas">
+        <input type="checkbox" name="update_names_indigenous_languages"><br>
 
-        <label>Fecha:</label>
-        <input type="text" name="fecha" placeholder="Fecha">
-        <input type="checkbox" name="update_fecha"><br>
+        <label for="production_location">Ubicación de Producción:</label>
+        <input type="text" id="production_location" name="production_location" placeholder="Ubicación de Producción">
+        <input type="checkbox" name="update_production_location"><br>
 
-        <label>Actividades:</label>
-        <input type="text" name="actividades" placeholder="Actividades">
-        <input type="checkbox" name="update_actividades"><br>
+        <label for="exists_today">Existe Hoy:</label>
+        <select id="exists_today" name="exists_today">
+            <option value="true">Sí</option>
+            <option value="false">No</option>
+        </select>
+        <input type="checkbox" name="update_exists_today"><br>
 
-        <label>Quién Puede Asistir:</label>
-        <input type="text" name="quien_puede_asistir" placeholder="Quién Puede Asistir">
-        <input type="checkbox" name="update_quien_puede_asistir"><br>
-
-        <label>Implicaciones:</label>
-        <input type="text" name="implicaciones" placeholder="Implicaciones">
-        <input type="checkbox" name="update_implicaciones"><br>
+        <label for="consumption_by_group">Consumo por Grupo:</label>
+        <input type="text" id="consumption_by_group" name="consumption_by_group" placeholder="Consumo por Grupo">
+        <input type="checkbox" name="update_consumption_by_group"><br>
 
         <button type="button" onclick="submitForm('Agregar')">Agregar</button>
         <button type="button" onclick="submitForm('Actualizar')">Actualizar</button>
         <button type="button" onclick="submitForm('Eliminar')">Eliminar</button>
         <button type="button" onclick="submitForm('Consultar')">Consultar</button>
         <button type="button" onclick="submitForm('Ver Todo')">Ver Todo</button>
-        <a href="/"><button type="button">Volver al Dashboard</button></a>
+        <button type="button" onclick="submitForm('Salir')">Volver al Dashboard</button>
     </form>
+
+    {% if modo == 'ver_todo' %}
+    <h2>Documentos en la Colección:</h2>
+    <ul>
+        {% for documento in documentos %}
+        <li>{{ documento }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flash-messages">
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    
     <script>
         function submitForm(action) {
             document.getElementById('action').value = action;
+            if (action === 'Actualizar' || action === 'Eliminar' || action === 'Consultar') {
+                document.getElementById('_id').disabled = false;
+            }
             document.forms[0].submit();
         }
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

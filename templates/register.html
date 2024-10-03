@@ -9,8 +9,13 @@
         <input type="text" name="nombre_usuario" placeholder="Nombre de usuario" required>
         <input type="password" name="password" placeholder="Contraseña" required>
         <select name="tipo_usuario">
-            <option value="admin">Admin</option>
-            <option value="user">Usuario</option>
+            <option value="admin">Investigador</option>
+            <option value="user">Colaboradores</option>
+        </select>
+        <select name="grupo_indigena">
+            <option value="bribri">Bribri</option>
+            <option value="ngabe">Ngäbe</option>
+            <option value="cabecar">Cabécar</option>
         </select>
         <button type="submit">Registrarse</button>
     </form>
@@ -25,5 +30,3 @@
     {% endwith %}
 </body>
 </html>
-
-

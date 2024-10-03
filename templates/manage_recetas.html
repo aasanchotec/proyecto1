@@ -2,43 +2,81 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Festividades</title>
+    <title>Gestión de Recetas</title>
 </head>
 <body>
-    <h1>Gestión de Festividades</h1>
+    <h1>Gestión de Recetas</h1>
     <form method="POST">
         <input type="hidden" name="action" value="none" id="action">
+        <!-- Campo ID visible pero no editable para operaciones específicas -->
+        <label for="_id">ID:</label>
+        <input type="text" id="_id" name="_id" placeholder="ID del Documento"><br>
+        
+        <label for="recipe_name">Nombre de la Receta:</label>
+        <input type="text" id="recipe_name" name="recipe_name" placeholder="Nombre de la Receta">
+        <input type="checkbox" name="update_recipe_name"><br>
 
-        <label>Nombre Original:</label>
-        <input type="text" name="nombre_original" placeholder="Nombre Original">
-        <input type="checkbox" name="update_nombre_original"><br>
+        <label for="ingredients">Ingredientes:</label>
+        <textarea id="ingredients" name="ingredients" placeholder="Describa los ingredientes"></textarea>
+        <input type="checkbox" name="update_ingredients"><br>
 
-        <label>Fecha:</label>
-        <input type="text" name="fecha" placeholder="Fecha">
-        <input type="checkbox" name="update_fecha"><br>
+        <label for="preparation_steps">Pasos de Preparación:</label>
+        <textarea id="preparation_steps" name="preparation_steps" placeholder="Pasos de Preparación"></textarea>
+        <input type="checkbox" name="update_preparation_steps"><br>
 
-        <label>Actividades:</label>
-        <input type="text" name="actividades" placeholder="Actividades">
-        <input type="checkbox" name="update_actividades"><br>
+        <label for="preparation_time">Tiempo de Preparación:</label>
+        <input type="text" id="preparation_time" name="preparation_time" placeholder="Tiempo de Preparación">
+        <input type="checkbox" name="update_preparation_time"><br>
 
-        <label>Quién Puede Asistir:</label>
-        <input type="text" name="quien_puede_asistir" placeholder="Quién Puede Asistir">
-        <input type="checkbox" name="update_quien_puede_asistir"><br>
+        <label for="occasion">Ocasión:</label>
+        <input type="text" id="occasion" name="occasion" placeholder="Ocasión">
+        <input type="checkbox" name="update_occasion"><br>
 
-        <label>Implicaciones:</label>
-        <input type="text" name="implicaciones" placeholder="Implicaciones">
-        <input type="checkbox" name="update_implicaciones"><br>
+        <label for="who_prepares">Quién Prepara:</label>
+        <input type="text" id="who_prepares" name="who_prepares" placeholder="Quién Prepara">
+        <input type="checkbox" name="update_who_prepares"><br>
+
+        <label for="used_for_festivities">Usada en Festividades:</label>
+        <select id="used_for_festivities" name="used_for_festivities">
+            <option value="true">Sí</option>
+            <option value="false">No</option>
+        </select>
+        <input type="checkbox" name="update_used_for_festivities"><br>
 
         <button type="button" onclick="submitForm('Agregar')">Agregar</button>
         <button type="button" onclick="submitForm('Actualizar')">Actualizar</button>
         <button type="button" onclick="submitForm('Eliminar')">Eliminar</button>
         <button type="button" onclick="submitForm('Consultar')">Consultar</button>
         <button type="button" onclick="submitForm('Ver Todo')">Ver Todo</button>
-        <a href="/"><button type="button">Volver al Dashboard</button></a>
+        <button type="button" onclick="submitForm('Salir')">Volver al Dashboard</button>
     </form>
+
+  
+    {% if modo == 'ver_todo' %}
+    <h2>Documentos en la Colección:</h2>
+    <ul>
+        {% for documento in documentos %}
+        <li>{{ documento }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flash-messages">
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
     <script>
         function submitForm(action) {
             document.getElementById('action').value = action;
+            if (action === 'Actualizar' || action === 'Eliminar' || action === 'Consultar') {
+                document.getElementById('_id').disabled = false;
+            }
             document.forms[0].submit();
         }
     </script>

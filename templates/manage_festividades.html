@@ -8,21 +8,19 @@
     <h1>Gestión de Festividades</h1>
     <form method="POST">
         <input type="hidden" name="action" value="none" id="action">
-        <!-- Campo ID visible pero no editable para operaciones específicas -->
         <label for="_id">ID:</label>
-        <input type="text" id="_id" name="_id" placeholder="ID del Documento"><br>
+        <input type="text" id="_id" name="_id" placeholder="ID de la Festividad"><br>
         
-
         <label for="nombre_original">Nombre Original:</label>
         <input type="text" id="nombre_original" name="nombre_original" placeholder="Nombre Original">
         <input type="checkbox" name="update_nombre_original"><br>
 
         <label for="fecha">Fecha:</label>
-        <input type="text" id="fecha" name="fecha" placeholder="Fecha">
+        <input type="text" id="fecha" name="fecha" placeholder="Fecha de la Festividad">
         <input type="checkbox" name="update_fecha"><br>
 
         <label for="actividades">Actividades:</label>
-        <input type="text" id="actividades" name="actividades" placeholder="Actividades">
+        <input type="text" id="actividades" name="actividades" placeholder="Actividades Realizadas">
         <input type="checkbox" name="update_actividades"><br>
 
         <label for="quien_puede_asistir">Quién Puede Asistir:</label>
@@ -30,7 +28,7 @@
         <input type="checkbox" name="update_quien_puede_asistir"><br>
 
         <label for="implicaciones">Implicaciones:</label>
-        <input type="text" id="implicaciones" name="implicaciones" placeholder="Implicaciones">
+        <input type="text" id="implicaciones" name="implicaciones" placeholder="Implicaciones de la Festividad">
         <input type="checkbox" name="update_implicaciones"><br>
 
         <button type="button" onclick="submitForm('Agregar')">Agregar</button>
@@ -41,7 +39,6 @@
         <button type="button" onclick="submitForm('Salir')">Volver al Dashboard</button>
     </form>
 
-    <!-- Sección para mostrar los documentos si la acción fue 'Ver Todo' -->
     {% if modo == 'ver_todo' %}
     <h2>Documentos en la Colección:</h2>
     <ul>
@@ -50,6 +47,16 @@
         {% endfor %}
     </ul>
     {% endif %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flash-messages">
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 
     <script>
         function submitForm(action) {

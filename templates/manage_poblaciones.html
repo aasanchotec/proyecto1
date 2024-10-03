@@ -2,43 +2,69 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Festividades</title>
+    <title>Gestión de Poblaciones</title>
 </head>
 <body>
-    <h1>Gestión de Festividades</h1>
+    <h1>Gestión de Poblaciones</h1>
     <form method="POST">
         <input type="hidden" name="action" value="none" id="action">
+        <label for="_id">ID:</label>
+        <input type="text" id="_id" name="_id" placeholder="ID de la Población"><br>
+        
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" placeholder="Nombre">
+        <input type="checkbox" name="update_name"><br>
 
-        <label>Nombre Original:</label>
-        <input type="text" name="nombre_original" placeholder="Nombre Original">
-        <input type="checkbox" name="update_nombre_original"><br>
+        <!-- Campos de location -->
+        <label for="geographic_area">Área Geográfica:</label>
+        <input type="text" id="geographic_area" name="location_geographic_area" placeholder="Área Geográfica">
+        <input type="checkbox" name="update_geographic_area"><br>
 
-        <label>Fecha:</label>
-        <input type="text" name="fecha" placeholder="Fecha">
-        <input type="checkbox" name="update_fecha"><br>
+        <label for="province">Provincia:</label>
+        <input type="text" id="province" name="location_province" placeholder="Provincia">
+        <input type="checkbox" name="update_province"><br>
 
-        <label>Actividades:</label>
-        <input type="text" name="actividades" placeholder="Actividades">
-        <input type="checkbox" name="update_actividades"><br>
+        <!-- Campos de population -->
+        <label for="year">Año:</label>
+        <input type="text" id="year" name="population_year" placeholder="Año">
+        <input type="checkbox" name="update_year"><br>
 
-        <label>Quién Puede Asistir:</label>
-        <input type="text" name="quien_puede_asistir" placeholder="Quién Puede Asistir">
-        <input type="checkbox" name="update_quien_puede_asistir"><br>
+        <label for="number">Número:</label>
+        <input type="text" id="number" name="population_number" placeholder="Número">
+        <input type="checkbox" name="update_number"><br>
 
-        <label>Implicaciones:</label>
-        <input type="text" name="implicaciones" placeholder="Implicaciones">
-        <input type="checkbox" name="update_implicaciones"><br>
+        <!-- Campos de languages_spoken -->
+        <label for="languages_spoken">Idiomas Hablados:</label>
+        <input type="text" id="languages_spoken" name="languages_spoken" placeholder="Idiomas Hablados">
+        <input type="checkbox" name="update_languages_spoken"><br>
+
+        <!-- Campos de social_structure -->
+        <label for="clans">Clanes:</label>
+        <input type="text" id="clans" name="social_structure_clans" placeholder="Clanes">
+        <input type="checkbox" name="update_clans"><br>
+
+        <label for="leadership">Liderazgo:</label>
+        <input type="text" id="leadership" name="social_structure_leadership" placeholder="Liderazgo">
+        <input type="checkbox" name="update_leadership"><br>
+
+        <label for="cultural_practices">Prácticas Culturales:</label>
+        <input type="text" id="cultural_practices" name="social_structure_cultural_practices" placeholder="Prácticas Culturales">
+        <input type="checkbox" name="update_cultural_practices"><br>
 
         <button type="button" onclick="submitForm('Agregar')">Agregar</button>
         <button type="button" onclick="submitForm('Actualizar')">Actualizar</button>
         <button type="button" onclick="submitForm('Eliminar')">Eliminar</button>
         <button type="button" onclick="submitForm('Consultar')">Consultar</button>
         <button type="button" onclick="submitForm('Ver Todo')">Ver Todo</button>
-        <a href="/"><button type="button">Volver al Dashboard</button></a>
+        <button type="button" onclick="submitForm('Salir')">Volver al Dashboard</button>
     </form>
+
     <script>
         function submitForm(action) {
             document.getElementById('action').value = action;
+            if (action === 'Actualizar' || action === 'Eliminar' || action === 'Consultar') {
+                document.getElementById('_id').disabled = false;
+            }
             document.forms[0].submit();
         }
     </script>
@@ -46,53 +72,33 @@
 </html>
 
 
+    {% if modo == 'ver_todo' %}
+    <h2>Documentos en la Colección:</h2>
+    <ul>
+        {% for documento in documentos %}
+        <li>{{ documento }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul class="flash-messages">
+        {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
 
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Gestión de Festividades</title>
-</head>
-<body>
-    <h1>Gestión de Festividades</h1>
-    <form method="POST">
-        <input type="hidden" name="action" value="none" id="action">
-
-        <label>Nombre Original:</label>
-        <input type="text" name="nombre_original" placeholder="Nombre Original">
-        <input type="checkbox" name="update_nombre_original"><br>
-
-        <label>Fecha:</label>
-        <input type="text" name="fecha" placeholder="Fecha">
-        <input type="checkbox" name="update_fecha"><br>
-
-        <label>Actividades:</label>
-        <input type="text" name="actividades" placeholder="Actividades">
-        <input type="checkbox" name="update_actividades"><br>
-
-        <label>Quién Puede Asistir:</label>
-        <input type="text" name="quien_puede_asistir" placeholder="Quién Puede Asistir">
-        <input type="checkbox" name="update_quien_puede_asistir"><br>
-
-        <label>Implicaciones:</label>
-        <input type="text" name="implicaciones" placeholder="Implicaciones">
-        <input type="checkbox" name="update_implicaciones"><br>
-
-        <button type="button" onclick="submitForm('Agregar')">Agregar</button>
-        <button type="button" onclick="submitForm('Actualizar')">Actualizar</button>
-        <button type="button" onclick="submitForm('Eliminar')">Eliminar</button>
-        <button type="button" onclick="submitForm('Consultar')">Consultar</button>
-        <button type="button" onclick="submitForm('Ver Todo')">Ver Todo</button>
-        <a href="/"><button type="button">Volver al Dashboard</button></a>
-    </form>
-    <script>
-        function submitForm(action) {
-            document.getElementById('action').value = action;
-            document.forms[0].submit();
+<script>
+    function submitForm(action) {
+        document.getElementById('action').value = action;
+        if (action === 'Actualizar' || action === 'Eliminar' || action === 'Consultar') {
+            document.getElementById('_id').disabled = false;
         }
-    </script>
+        document.forms[0].submit();
+    }
+</script>
 </body>
 </html>
