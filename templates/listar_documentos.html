@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Documentos en {{ nombre_coleccion }}</title>
+</head>
+<body>
+    <h1>Documentos en {{ nombre_coleccion }}</h1>
+    {% if documentos %}
+    <ul>
+        {% for documento in documentos %}
+        <li>{{ documento }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No hay documentos en esta colección.</p>
+    {% endif %}
+    <a href="/">Volver al inicio</a>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard de Investigador</title>
+    <style>
+        div {
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenido a Herencias,{{ nombre_usuario }}</h1>
+    <p>Resumen y herramientas para Investigadores:</p>
+    
+    <div>
+        <button onclick="window.location.href='{{ url_for('resumen_general') }}'">Resumen General</button>
+        <button onclick="window.location.href='{{ url_for('estado_productos') }}'">Estado de Productos por Recetas</button>
+        <button onclick="window.location.href='{{ url_for('actividad_recetas') }}'">Actividad de Recetas</button>
+        <button onclick="window.location.href='{{ url_for('administrar_colaboradores') }}'">Administración de Colaboradores</button>
+        <button onclick="window.location.href='{{ url_for('notificaciones_alertas') }}'">Notificaciones y Alertas</button>
+    </div>
+    <br>
+    <button onclick="window.location.href='/logout'">Cerrar sesión</button>
+</body>
+</html>
