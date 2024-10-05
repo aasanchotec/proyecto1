@@ -4,27 +4,35 @@
     <title>Dashboard de Investigador</title>
     <style>
         div {
-            margin: 10px 0;
+            margin: 20px 0;
         }
-        button {
-            padding: 10px;
+        a {
+            display: inline-block;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
             margin-right: 10px;
-            cursor: pointer;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <h1>Bienvenido a Herencias,{{ nombre_usuario }}</h1>
+    <h1>Bienvenido a Herencias, {{ nombre_usuario }}</h1>
     <p>Resumen y herramientas para Investigadores:</p>
     
     <div>
-        <button onclick="window.location.href='{{ url_for('resumen_general') }}'">Resumen General</button>
-        <button onclick="window.location.href='{{ url_for('estado_productos') }}'">Estado de Productos por Recetas</button>
-        <button onclick="window.location.href='{{ url_for('actividad_recetas') }}'">Actividad de Recetas</button>
-        <button onclick="window.location.href='{{ url_for('administrar_colaboradores') }}'">Administración de Colaboradores</button>
-        <button onclick="window.location.href='{{ url_for('notificaciones_alertas') }}'">Notificaciones y Alertas</button>
+        <a href="{{ url_for('resumen_general') }}">Resumen General</a>
+        <a href="{{ url_for('estado_productos') }}">Estado de Productos por Recetas</a>
+        <a href="{{ url_for('actividad_recetas') }}">Actividad de Recetas</a>
+        <a href="{{ url_for('administrar_colaboradores') }}">Administración de Colaboradores</a>
+        <a href="{{ url_for('notificaciones_alertas') }}">Notificaciones y Alertas</a>
     </div>
+    
     <br>
-    <button onclick="window.location.href='/logout'">Cerrar sesión</button>
+    <a href="{{ url_for('logout') }}">Cerrar sesión</a>
 </body>
 </html>

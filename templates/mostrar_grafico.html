@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Estado de Productos por Receta</title>
+</head>
+<body>
+    <h1>Proporción de Ingredientes en una Receta</h1>
+    <form method="POST" action="{{ url_for('estado_productos') }}">
+        <label for="receta_id">ID de la Receta:</label>
+        <input type="text" id="receta_id" name="receta_id" required>
+        <button type="submit">Generar Gráfico</button>
+    </form>
+    {% if plot_url %}
+        <img src="data:image/png;base64,{{ plot_url }}" alt="Gráfico de Ingredientes">
+    {% endif %}
+    <br>
+    <!-- Botón para volver al Dashboard -->
+    <button onclick="window.location.href='{{ url_for('dashboard_investigador') }}'">Volver al Dashboard</button>
+</body>
+</html>

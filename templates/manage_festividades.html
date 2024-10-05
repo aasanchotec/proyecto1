@@ -39,13 +39,29 @@
         <button type="button" onclick="submitForm('Salir')">Volver al Dashboard</button>
     </form>
 
+
     {% if modo == 'ver_todo' %}
     <h2>Documentos en la Colección:</h2>
-    <ul>
+    <table border =1>
+        <tr>
+            <th>ID</th>
+            <th>Nombre Original</th>
+            <th>Fecha</th>
+            <th>Actividades</th>
+            <th>Quién Puede Asistir</th>
+            <th>Implicaciones</th>
+        </tr>
         {% for documento in documentos %}
-        <li>{{ documento }}</li>
+        <tr>
+            <td>{{ documento._id }}</td>
+            <td>{{ documento.Nombre_Original }}</td>
+            <td>{{ documento.Fecha }}</td>
+            <td>{{ documento.Actividades }}</td>
+            <td>{{ documento.Quien_Puede_Asistir }}</td>
+            <td>{{ documento.Implicaciones }}</td>
+        </tr>
         {% endfor %}
-    </ul>
+    </table>
     {% endif %}
 
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -57,6 +73,7 @@
             </ul>
         {% endif %}
     {% endwith %}
+
 
     <script>
         function submitForm(action) {
